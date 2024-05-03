@@ -12,7 +12,7 @@ RUN apt-get update \
 
 ENV USER='vscode'
 ENV NODE_VERSION 18.15.0
-ENV NODE_ENV docker
+ENV NODE_ENV devcontainer
 ENV NPM_CONFIG_PREFIX="/home/${USER}/.npm-global"
 ENV BUNDLE_PATH=/home/${USER}/.gems
 
@@ -82,6 +82,16 @@ RUN apt-get update \
   && rm -rf /workspace/doubtfire-api/.ci-setup/texlive-install.sh \
   && rm -rf /install-tl-* \
   && mkdir /run/mysqld
+
+# Install caddy for reverse proxy
+RUN dpkgArch="$(dpkg --print-architecture)" \
+  && case "${dpkgArch##*-}" in \
+    amd64) ;; \
+    arm64) ;; \
+    *) echo "unsupported architecture ${dpkgArch}"; exit 1 ;; \
+  esac \
+  && wget "https://caddyserver.com/api/download?os=linux&arch=${dpkgArch}" --output-document=/usr/local/bin/caddy \
+  && chmod +x /usr/local/bin/caddy
 
 USER "${USER}"
 

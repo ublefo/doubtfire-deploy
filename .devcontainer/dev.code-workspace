@@ -1,0 +1,25 @@
+{
+  "folders": [
+    {
+      "path": "/workspace",
+      "name": "doubtfire-deploy"
+    },
+    {
+      "path": "/workspace/doubtfire-api"
+    },
+    {
+      "path": "/workspace/doubtfire-web"
+    },
+    {
+      "path": "/workspace/doubtfire-overseer"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "doubtfire-api/**": true,
+      "doubtfire-web/**": true,
+      "doubtfire-overseer/**": true
+    },
+    "rubyLsp.formatter": "rubocop",
+  }
+}

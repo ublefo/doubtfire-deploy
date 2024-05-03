@@ -4,7 +4,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Serve web frontend",
+      "label": "Frontend",
       "type": "shell",
       "command": "npm install -f && npm start",
       "group": "build",
@@ -19,7 +19,7 @@
       }
     },
     {
-      "label": "Serve Rails API",
+      "label": "Backend",
       "type": "shell",
       "command": "bundle install && rails s",
       "group": "build",
@@ -34,8 +34,25 @@
       }
     },
     {
+      "label": "Reverse Proxy",
+      "type": "shell",
+      "command": "caddy run --config Caddyfile",
+      "group": "build",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated",
+        "echo": false
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    },
+    {
       "label": "Serve",
-      "dependsOn": ["Serve web frontend", "Serve Rails API"],
+      "dependsOn": ["Frontend", "Backend"],
       "group": "build",
       "runOptions": {
         "runOn": "folderOpen" // This starts both tasks when the container is started
